@@ -1,0 +1,18 @@
+# python 3.11.4
+kivy
+# kivy-deps.angle
+# kivy-deps.gstreamer
+# kivy-deps.glew
+# kivy-deps.sdl2
+
+tqdm
+bcrypt
+
+pydicom
+dcm2niix
+dicom2nifti
+SimpleITK
+
+gestures4kivy
+
+opencv-python

@@ -2,7 +2,7 @@
 *.in
 *.pdf
 *.sh
-*.txt
+# *.txt
 Makefile
 ChangeLog
 # model file
