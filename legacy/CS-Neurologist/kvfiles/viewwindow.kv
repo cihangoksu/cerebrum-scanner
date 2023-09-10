@@ -1,0 +1,186 @@
+<ViewWindow>:
+    name: 'viewScreen'
+    id: id_ViewWindow
+
+    TranscriptorBackground:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 12
+        BoxLayout:
+            size_hint_y: 18
+            BoxLayout:
+                size_hint_x: 78
+            BoxLayout:
+                size_hint_x: 20            
+                Button:
+                    id: id_ChooseAnotherFileButton
+                    disabled: False
+                    background_color: 0,0,0,0
+                    text_size: self.size
+                    halign: "center"
+                    valign: "middle"
+                    font_size: self.size[1]*0.24
+                    text: "        enable\n        AI-assist"
+                    pos: self.pos
+                    size: self.size
+                    opacity: 0.8 if self.disabled == True else 1
+                    on_release:
+                        root.Callback_Button_Enable_AI()
+                    canvas.before:
+                        Color:
+                            rgba: hex('#000000') if self.state=='normal' else hex('#6a6e73')
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+                    canvas.after:
+                        Rectangle:
+                            pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.25
+                            size: self.size[1]*0.5,self.size[1]*0.5
+                            source: 'assets/images/PNG/ai-assist.png'
+            
+            BoxLayout:
+                size_hint_x: 2
+
+
+
+        BoxLayout:
+            size_hint_y: 36
+        BoxLayout:
+            size_hint_y: 18
+            BoxLayout:
+                size_hint_x: 78
+            BoxLayout:
+                size_hint_x: 20            
+                Button:
+                    id: id_ConsultButton
+                    disabled: False
+                    background_color: 0,0,0,0
+                    text_size: self.size
+                    halign: "center"
+                    valign: "middle"
+                    font_size: self.size[1]*0.24
+                    text: "       Upload\n       diagnosis"
+                    pos: self.pos
+                    size: self.size
+                    opacity: 0.8 if self.disabled == True else 1
+                    on_release:
+                        root.Callback_Button_Upload_Feedback()
+                    canvas.before:
+                        Color:
+                            rgba: hex('#5f9a34') if self.state=='normal' else hex('#afcc9a')
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+                    canvas.after:
+                        Rectangle:
+                            pos: self.pos[0] + self.size[0]*0.1, self.pos[1] + self.size[1]*0.32
+                            size: self.size[1]*0.45,self.size[1]*0.36
+                            source: 'assets/images/PNG/icons-upload.png'
+
+            BoxLayout:
+                size_hint_x: 2
+
+        BoxLayout:
+            size_hint_y: 12
+
+
+        BoxLayout:
+            size_hint_y: 4
+            FloatLayout:
+                Label:
+                    id: id_footer
+                    text: ""
+                    color: hex('#191919')
+                    halign: "center"
+                    text_size: self.width, None
+                    font_size: self.size[0]/90
+
+    FloatLayout:
+        Image:
+            id: id_cerebrumscanner_logo
+            source: 'assets/images/PNG/CS-LOGO-WHITE.png'
+            # size_hint: None, None
+            size_hint: 0.22, 0.28
+            pos_hint: {"center_x":0.88 , 'center_y':0.5}
+            keep_ratio: True
+
+
+        Label:
+            id: id_ScanPathInfo
+            size_hint_x: 0.92*root.height/root.width
+            size_hint_y: 0.04
+            pos_hint: {'center_x': 0.92*root.height/root.width/2+0.02, 'center_y':0.98}
+            text: "Patient info:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.02
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            markup: True
+
+        BoxLayout:
+            id: id_BoxLayoutScatter
+            size_hint_x: 0.92*root.height/root.width
+            size_hint_y: 0.92
+            
+            pos_hint: {'center_x': 0.92*root.height/root.width/2+0.02, 'center_y':0.5}
+            background_color: 0,0,0,0
+            canvas.before:
+                Color:
+                    rgba: hex('#5f9a34')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20,]
+            Scatter:
+                id:id_CTScanScatter
+                size_hint_x: 1
+                size_hint_y: 1
+                do_rotation: False
+                pos_hint: {'center_x': 0.5, 'center_y':0.5}
+                Image:
+                    id: id_CTScanScatterImage
+                    source: root.source_image_path
+                    allow_stretch: True
+                    keep_ratio: True
+                    size_hint_x: None
+                    size_hint_y: None
+                    height: self.parent.height
+                    width: self.parent.height*self.image_ratio
+
+
+        Label:
+            id: id_AI_Diagnosis
+            size_hint_x: 0.92*root.height/root.width
+            size_hint_y: 0.04
+            pos_hint: {'center_x': 0.92*root.height/root.width/2+0.02, 'center_y':0.90}
+            text: "AI-assist is available."
+            line_height: 1.2
+            color: hex('#ffffff')
+            font_size: self.size[0]*0.04
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            markup: True
+
+
+
+
+        TextInput:
+            id: id_Diagnosis
+            disabled: False
+            opacity: 0 if self.disabled == True else 1
+            name:"Diagnosis"
+            size_hint_x: 0.20
+            size_hint_y: 0.92
+            pos_hint: {'center_x': 0.64, 'y':0.04}
+
+            font_size: self.size[0]/12
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/20
+

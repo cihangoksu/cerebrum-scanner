@@ -1,0 +1,97 @@
+#: import hex kivy.utils.get_color_from_hex
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+<LoadingWindow>:
+    name: "loadingScreen"
+
+    TranscriptorBackground:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 70
+        BoxLayout:
+            size_hint_y: 15
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 40
+            BoxLayout:
+                size_hint_x: 20
+                Button:
+                    id: id_ProceedViewWindow
+                    disabled: True
+                    background_color: 0,0,0,0
+                    text_size: self.size
+                    halign: "center"
+                    valign: "bottom"
+                    padding_y: self.size[1]*0.15
+                    font_size: self.size[1]*0.24
+                    text: "Proceed"
+                    pos: self.pos
+                    size: self.size
+                    opacity: 0 if self.disabled == True else 1
+                    on_release:
+                        root.Callback_Proceed()
+                    canvas.before:
+                        Color:
+                            rgba: hex('#d30000') if self.state=='normal' else hex('#ed2939')
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+                    canvas.after:
+                        Rectangle:
+                            pos: self.pos[0] + self.size[0]*0.46, self.pos[1] + self.size[1]*0.5
+                            size: self.size[1]*0.22,self.size[1]*0.36
+                            source: 'assets/images/PNG/icons-chosen.png'    
+            BoxLayout:
+                size_hint_x: 40
+
+
+
+        BoxLayout:
+            size_hint_y: 15
+
+
+
+    FloatLayout:
+
+        PatientIDTextInput:
+            id: id_PatientID
+            disabled: True
+            opacity: 0 if self.disabled == True else 1
+            name:"Patient_ID"
+            size_hint_x: 0.20
+            size_hint_y: 0.1
+            pos_hint: {'center_x': 0.5, 'center_y':0.40}
+
+            font_size: self.size[0]/8
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+            
+        Label:
+            id: id_PatientIDLabel
+            disabled: True
+            opacity: 0 if self.disabled == True else 1
+            name:"Patient_ID_Label"
+            text: 'Please enter the case ID:'
+
+            color: hex('#000000')
+            pos_hint: {'x': 0, 'center_y': 0.50}
+            halign: "center"
+            text_size: self.width, None
+            font_size: self.size[0]/40
+        
+        Image:
+            id: id_cerebrumscanner_logo
+            source: 'assets/images/PNG/CS-LOGO-WHITE.png'
+            size_hint: 0.8, 0.8
+            pos_hint: {"center_x":0.5 , 'center_y':0.75}
+            keep_ratio: True
+      
+        Label:
+            text: root.id_loading_info_text
+            color: hex('#D21404')
+            pos_hint: {'x': 0, 'y': -0.45}
+            halign: "center"
+            text_size: self.width, None
+            font_size: self.size[0]/80

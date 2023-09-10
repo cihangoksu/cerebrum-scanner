@@ -1,0 +1,276 @@
+<BrowseWindow>:
+    name: 'browseScreen'
+    id: id_BrowseWindow
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            size_hint_y: 10
+            md_bg_color: "white"
+
+        
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 10
+            md_bg_color: "black"
+            MDBoxLayout:
+                size_hint_y: 50
+                MDLabel:
+                    text: "Name Surname (36y/m)"
+                    halign: "center"
+                    valign: "center"
+                    bold: True
+                    font_style: "H6"
+
+            MDBoxLayout:
+                size_hint_y: 50
+                MDLabel:
+                    text: "Onset: 96min, MRS: 3, NIHSS: 5"
+                    halign: "center"
+                    valign: "center"
+                    bold: True
+                    font_style: "H6"
+
+        MDBoxLayout:
+            size_hint_y: 5
+            md_bg_color: "red"
+
+        MDBoxLayout:
+            size_hint_y: 5
+            md_bg_color: "white"
+
+        MDBoxLayout:
+            size_hint_y: 60
+            md_bg_color: "black"
+
+        MDBoxLayout:
+            size_hint_y: 10
+            md_bg_color: "white"
+
+
+    MDFloatLayout:
+        Image:
+            id: id_cerebrumscanner_logo
+            source: f'{root.assets_path}/images/PNG/CS-LOGO-WHITE.png'
+            # size_hint: None, None
+            size_hint: 0.6, 0.08
+            pos_hint: {"left":0.1 , 'center_y':0.95}
+            keep_ratio: True
+
+        MDRaisedButton:
+            id: id_ChooseAnotherFileButton
+            text: "choose CT"
+            pos_hint: {"right": 0.9, "center_y": 0.95}
+
+
+        MDIconButton:
+            id: id_previous_nifti
+            pos_hint: {"x": 0.05, "center_y": 0.775}
+            size_hint: None, 0.04
+            size: self.size[1], self.size[1] 
+            icon: "chevron-left-circle"
+            theme_text_color: 'Custom'  # Set the text color to custom
+            text_color: "black"
+            on_release: root.Callback_get_previous_scan()
+
+        MDIconButton:
+            id: id_next_nifti
+            pos_hint: {"right": 0.95, "center_y": 0.775}
+            size_hint: None, 0.04
+            size: self.size[1], self.size[1] 
+            icon: "chevron-right-circle"
+            theme_text_color: 'Custom'  # Set the text color to custom
+            text_color: "black"
+            on_release: root.Callback_get_next_scan()
+
+
+
+
+#####################################################################
+        # Button:
+        #     id: id_previous_nifti
+        #     disabled: False
+        #     background_color: 0,0,0,0
+        #     text_size: self.size
+        #     halign: "center"
+        #     valign: "center"
+        #     padding_y: self.size[1]*0.15
+        #     font_size: self.size[1]*1.2
+        #     text: "-"
+
+        #     size_hint_x: 0.02
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.52, 'center_y':0.97}
+
+        #     opacity: 0.8 if self.disabled == True else 1
+        #     on_release:
+        #         root.Callback_get_previous_scan()
+        #     canvas.before:
+        #         Color:
+        #             rgba: hex('#000000') if self.state=='normal' else hex('#d0a23e')
+        #         RoundedRectangle:
+        #             pos: self.pos
+        #             size: self.size
+        #             radius: [5,]
+
+
+        # Button:
+        #     id: id_next_nifti
+        #     disabled: False
+        #     background_color: 0,0,0,0
+        #     text_size: self.size
+        #     halign: "center"
+        #     valign: "center"
+        #     padding_y: self.size[1]*0.15
+        #     font_size: self.size[1]*1.2
+        #     text: "+"
+
+        #     size_hint_x: 0.02
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.92, 'center_y':0.97}
+
+        #     opacity: 0.8 if self.disabled == True else 1
+        #     on_release:
+        #         root.Callback_get_next_scan()
+        #     canvas.before:
+        #         Color:
+        #             rgba: hex('#000000') if self.state=='normal' else hex('#d0a23e')
+        #         RoundedRectangle:
+        #             pos: self.pos
+        #             size: self.size
+        #             radius: [5,]
+
+
+        # Label:
+        #     id: id_scan_name
+        #     # background_color: 0,0,0,0
+        #     background_color: 1,1,0,1
+        #     text_size: self.size
+        #     halign: "center"
+        #     valign: "center"
+        #     padding_y: self.size[1]*0.15
+        #     font_size: self.size[1]*0.6
+        #     text: root.selected_scan_name
+
+        #     size_hint_x: 0.36
+        #     size_hint_y: 0.04
+        #     pos_hint: {'center_x': 0.73, 'center_y':0.97}
+
+        #     opacity: 1
+        #     canvas.before:
+        #         Color:
+        #             rgba: hex('#000000')
+        #         RoundedRectangle:
+        #             pos: self.pos
+        #             size: self.size
+        #             radius: [5,]
+
+
+        # Spinner:
+        #     id: id_scan_window
+        #     text: 'Select window to view'
+
+        #     size_hint_x: 0.15
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.55, 'center_y':0.92}
+        #     opacity: 1
+        #     text: 'Custom' # Width, Level windowing (W:70, L:30) (W:180, L:80) (W:30, L:30) (W:400, L:50) (W:2000, L:600)
+        #     values: 'Custom', 'Brain', 'Blood', 'Stroke', 'Soft tissue', 'Bone'
+        #     on_text: root.Callback_Apply_Window()
+
+
+
+        # Label:
+        #     id: id_LabelWindow_width
+        #     size_hint_x: 0.05
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.71, 'center_y':0.92}
+        #     text: "width:"
+        #     line_height: 1.2
+        #     color: hex('#383838')
+        #     font_size: self.size[0]*0.3
+        #     text_size: self.size
+        #     halign: "right"
+        #     valign: "middle"
+        #     markup: True
+
+        
+        # CTScanLevelWidthTextInput:
+        #     id: id_TextInputWindow_width
+        #     name:"TextInputWindow_width"
+        #     size_hint_x: 0.04
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.77, 'center_y':0.92}
+
+        #     font_size: self.size[0]*0.3
+        #     padding_x: self.size[0]/20
+        #     padding_y: self.size[1]/5
+
+
+
+
+
+        # Label:
+        #     id: id_LabelWindow_level
+        #     size_hint_x: 0.05
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.81, 'center_y':0.92}
+        #     text: "level:"
+        #     line_height: 1.2
+        #     color: hex('#383838')
+        #     font_size: self.size[0]*0.3
+        #     text_size: self.size
+        #     halign: "right"
+        #     valign: "middle"
+        #     markup: True
+
+        # CTScanLevelWidthTextInput:
+        #     id: id_TextInputWindow_level
+        #     name:"TextInputWindow_level"
+        #     size_hint_x: 0.04
+        #     size_hint_y: 0.04
+        #     pos_hint: {'x': 0.87, 'center_y':0.92}
+
+        #     font_size: self.size[0]*0.3
+        #     padding_x: self.size[0]/20
+        #     padding_y: self.size[1]/5
+
+
+
+
+
+
+        # FloatLayout:
+        #     id: id_BoxLayoutScatter
+        #     size_hint_x: 0.46
+        #     size_hint_y: 0.80
+        #     pos_hint: {'center_x': 0.75, 'center_y':0.44}
+        #     background_color: 0,0,0,0
+        #     canvas.before:
+        #         Color:
+        #             rgba: hex('#d3d3d3')
+        #         RoundedRectangle:
+        #             pos: self.pos
+        #             size: self.size
+        #             radius: [20,]
+
+        #     Image:
+        #         id: id_CTScanScatterImage
+        #         source: f'{root.assets_path}/images/PNG/ID_5acb8fb91.png'
+        #         allow_stretch: True
+        #         keep_ratio: True
+
+        #         texture: root.texture_CTScanScatterImage
+                
+        #         opacity: 0 
+
+        #         pos: self.pos
+                
+        #         size_hint_x: 1*root.scale_factor_size
+        #         size_hint_y: 1*root.scale_factor_size
+                
+        #         # height: self.parent.height
+        #         # width: self.parent.height*self.image_ratio
+
+
+

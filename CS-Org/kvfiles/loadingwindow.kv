@@ -1,0 +1,26 @@
+#: import hex kivy.utils.get_color_from_hex
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+<LoadingWindow>:
+    name: "loadingScreen"
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: hex('#ffffff')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Image:
+            id: id_cerebrumscanner_logo
+            source: f'{root.assets_path}/images/PNG/CS-LOGO-WHITE.png'
+            # size_hint: None, None
+            size_hint: 0.8, 0.8
+            pos_hint: {"center_x":0.5 , 'center_y':0.5}
+            keep_ratio: True
+        Label:
+            text: root.id_loading_info_text
+            color: hex('#D21404')
+            pos_hint: {'x': 0, 'y': -0.45}
+            halign: "center"
+            text_size: self.width, None
+            font_size: self.size[0]/80

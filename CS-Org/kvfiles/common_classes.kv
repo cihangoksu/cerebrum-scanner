@@ -1,0 +1,548 @@
+#:import hex kivy.utils.get_color_from_hex
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+
+# Menu Window Items #
+<TranscriptorBackground@BoxLayout>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: f'{app.assets_path}/images/PNG/background.png'
+
+
+
+<RoundedButton@Button>:
+    font_size: self.size[1]*0.5
+    canvas.before:
+        Color:
+            rgba: hex('#383838') if self.state=='normal' else hex('#575757')  # visual feedback of press
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [20,]
+
+
+
+<AllWellPopup>:
+    name: 'allwellpopup'
+    id: id_AllWellPopup
+
+    title: ""
+    title_color: hex('#FFCC00')
+    title_size: self.size[1]*0.1
+    separator_color: hex('#FFCC00')
+    separator_height: 0
+
+    auto_dismiss: False
+    size_hint:(0.5, 0.5)
+
+    background: f'{app.assets_path}/images/PNG/popupbackground.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 2
+        BoxLayout:
+            size_hint_y: 35
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 30
+            BoxLayout:
+                size_hint_x: 40
+                Image:
+                    pos: self.pos
+                    size: self.size
+                    source: f'{app.assets_path}/images/PNG/icons-correct.png'
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_x: 30
+        BoxLayout:
+            size_hint_y: 40
+            Label:
+                pos: self.pos
+                size: self.size
+                text: root.id_AllWellPopupContent
+                color: hex('#606060')
+                font_size: str(self.size[1]*0.22)
+                halign: "center"
+                valign: "center"
+                text_size: self.size
+                markup: True
+                padding_x: self.size[0] * 0.02
+        BoxLayout:
+            size_hint_y: 3
+
+        BoxLayout:
+            size_hint_y: 20
+
+            Button:
+                id: id_AllWellOKButton
+                background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                text: "OK"
+                font_size: self.size[1]*0.6
+                canvas.before:
+                    Color:
+                        rgba: hex('#5e9a34') if self.state=='normal' else hex('#385c1F')  # visual feedback of press
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [20,]
+                on_release: root.dismiss()
+
+
+<FeedbackPopup>:
+    name: 'feedbackpopup'
+    id: id_FeedbackPopup
+
+    title: ""
+    title_color: hex('#FFCC00')
+    title_size: self.size[1]*0.1
+    separator_color: hex('#FFCC00')
+    separator_height: 0
+
+    auto_dismiss: False
+    size_hint:(0.5, 0.5)
+
+    background: f'{app.assets_path}/images/PNG/popupbackground.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 2
+        BoxLayout:
+            size_hint_y: 75
+            Label:
+                pos: self.pos
+                size: self.size
+                text: root.id_FeedbackPopupContent
+                color: hex('#606060')
+                font_size: str(self.size[1]*0.12)
+                halign: "center"
+                valign: "center"
+                text_size: self.size
+                markup: True
+                padding_x: self.size[0] * 0.02
+        BoxLayout:
+            size_hint_y: 3
+
+        BoxLayout:
+            size_hint_y: 20
+
+            Button:
+                id: id_FeedbackOKButton
+                background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                text: "OK"
+                font_size: self.size[1]*0.6
+                canvas.before:
+                    Color:
+                        rgba: hex('#5e9a34') if self.state=='normal' else hex('#385c1F')  # visual feedback of press
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [20,]
+                on_release: root.dismiss()
+
+
+<WarningPopup>:
+    name: 'warningpopup'
+    id: id_WarningPopup
+
+    title: ""
+    title_color: hex('#FFCC00')
+    title_size: self.size[1]*0.1
+    separator_color: hex('#FFCC00')
+    separator_height: 0
+
+    auto_dismiss: False
+    size_hint:(0.5, 0.5)
+
+    background: f'{app.assets_path}/images/PNG/popupbackground.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 2
+        BoxLayout:
+            size_hint_y: 35
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 30
+            BoxLayout:
+                size_hint_x: 40
+                Image:
+                    pos: self.pos
+                    size: self.size
+                    source: root.id_WarningPopupImage
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_x: 30
+        BoxLayout:
+            size_hint_y: 40
+            Label:
+                pos: self.pos
+                size: self.size
+                text: root.id_WarningPopupContent
+                color: hex('#606060')
+                font_size: str(self.size[1]*0.22)
+                halign: "center"
+                valign: "center"
+                text_size: self.size
+                markup: True
+                padding_x: self.size[0]*0.02
+        BoxLayout:
+            size_hint_y: 3
+
+        BoxLayout:
+            size_hint_y: 20
+
+            Button:
+                id: id_WarningOKButton
+                background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                text: "OK"
+                font_size: self.size[1]*0.6
+                canvas.before:
+                    Color:
+                        rgba: hex('#c85417') if self.state=='normal' else hex('#d0a23e')  # visual feedback of press
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [20,]
+                on_release: root.dismiss()
+
+
+<AreYouSurePopup>:
+    name: 'areyousurepopup'
+    id: id_AreYouSurePopup
+
+    title: ""
+    title_color: hex('#FFCC00')
+    title_size: self.size[1]*0.1
+    separator_color: hex('#FFCC00')
+    separator_height: 0
+
+    auto_dismiss: False
+    size_hint:(0.5, 0.5)
+
+    background: f'{app.assets_path}/images/PNG/popupbackground.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 2
+        BoxLayout:
+            size_hint_y: 35
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 30
+            BoxLayout:
+                size_hint_x: 40
+                Image:
+                    pos: self.pos
+                    size: self.size
+                    source: f'{app.assets_path}/images/PNG/icons-question.png'
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_x: 30
+        BoxLayout:
+            size_hint_y: 40
+            Label:
+                pos: self.pos
+                size: self.size
+                text: root.id_AreYouSurePopupContent
+                color: hex('#606060')
+                font_size: str(self.size[1]*0.22)
+                halign: "center"
+                valign: "center"
+                text_size: self.size
+                markup: True
+                padding_x: self.size[0] * 0.02
+        BoxLayout:
+            size_hint_y: 3
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 20
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 47
+                Button:
+                    id: id_CancelButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    text: root.id_CancelButtonContent
+                    font_size: self.size[1]*0.5
+                    canvas.before:
+                        Color:
+                            rgba: hex('#383838') if self.state=='normal' else hex('#575757')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 47
+                Button:
+                    id: id_ProceedButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    text: root.id_ProceedButtonContent
+                    font_size: self.size[1]*0.5
+                    canvas.before:
+                        Color:
+                            rgba: hex('#c85417') if self.state=='normal' else hex('#d0a23e')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+            BoxLayout:
+                size_hint_x: 2
+
+
+<LoadingPopup>:
+    name: 'loadingpopup'
+    id: id_LoadingPopup
+
+    title: ""
+    title_color: hex('#FFCC00')
+    title_size: self.size[1]*0.1
+    separator_color: hex('#FFCC00')
+    separator_height: 0
+
+    auto_dismiss: False
+    size_hint:(0.3, 0.3)
+
+    background: f'{app.assets_path}/images/PNG/popupbackground.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 2
+        BoxLayout:
+            size_hint_y: 60
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 40
+            BoxLayout:
+                size_hint_x: 20
+                Image:
+                    source: f'{app.assets_path}/images/loading.gif'
+                    anim_delay: 0.1
+            BoxLayout:
+                size_hint_x: 40
+        BoxLayout:
+            size_hint_y: 40
+            Label:
+                pos: self.pos
+                size: self.size
+                text: root.id_LoadingPopupContent
+                color: hex('#606060')
+                font_size: str(self.size[1]*0.3)
+                halign: "center"
+                valign: "center"
+                text_size: self.size
+                markup: True
+                padding_x: self.size[0] * 0.02
+        BoxLayout:
+            size_hint_y: 3
+
+<FileBrowsePopup>:
+    name: 'filebrowsepopup'
+    id: id_FileBrowsePopup
+
+    title: ""
+    title_color: hex('#FFCC00')
+    title_size: self.size[1]*0.1
+    separator_color: hex('#FFCC00')
+    separator_height: 0
+
+    auto_dismiss: False
+    size_hint:(0.8, 0.9)
+
+    background: f'{app.assets_path}/images/PNG/popupbackground.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 8
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 48
+                Button:
+                    id: id_ListViewButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    text: "List view"
+                    font_size: self.size[1]*0.4
+                    on_press:
+                        id_filechooser.view_mode = 'list'
+                    canvas.before:
+                        Color:
+                            rgba: hex('#191919') if self.state=='normal' else hex('#575757')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,0,0,0]
+                        Color:
+                            rgba: hex('#e2e2e2')
+                        Line:
+                            points: self.pos[0], self.pos[1], self.pos[0] + self.size[0], self.pos[1]
+                            width: 0.5
+            BoxLayout:
+                size_hint_x: 48
+                Button:
+                    id: id_IconViewButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    text: "Icon view"
+                    font_size: self.size[1]*0.4
+                    on_press:
+                        id_filechooser.view_mode = 'icon'
+                    canvas.before:
+                        Color:
+                            rgba: hex('#191919') if self.state=='normal' else hex('#575757')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [0,20,0,0]
+                        Color:
+                            rgba: hex('#e2e2e2')
+                        Line:
+                            points: self.pos[0], self.pos[1], self.pos[0] + self.size[0], self.pos[1]
+                            width: 0.5
+
+            BoxLayout:
+                size_hint_x: 2
+
+        BoxLayout:
+            size_hint_y: 65
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 96
+                CustomFileChooser:
+                    id: id_filechooser
+                    path: root.id_defaultpath #"C:/Program Files"
+                    
+                    FileChooserListLayout
+                        canvas.before:
+                            Color:
+                                rgba: hex('#191919')
+                            RoundedRectangle:
+                                # pos: self.pos
+                                pos: self.pos[0], self.pos[1]
+                                size: self.size
+                                # radius: [0,0,20,20]
+                                radius: [0,]
+
+                    FileChooserIconLayout
+                        canvas.before:
+                            Color:
+                                rgba: hex('#191919')
+                            RoundedRectangle:
+                                # pos: self.pos
+                                pos: self.pos[0], self.pos[1]
+                                size: self.size
+                                #radius: [0,0,20,20]
+                                radius: [0,]
+            BoxLayout:
+                size_hint_x: 2
+
+        BoxLayout:
+            size_hint_y: 6
+            orientation: 'horizontal'
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 96
+                canvas.before:
+                    Color:
+                        rgba: hex('#191919')
+                    RoundedRectangle:
+                        # pos: self.pos
+                        pos: self.pos[0], self.pos[1]
+                        size: self.size
+                        radius: [0,0,20,20]
+            BoxLayout:
+                size_hint_x: 2
+
+        BoxLayout:
+            size_hint_y: 10
+            Label:
+                pos: self.pos
+                size: self.size
+                text: root.id_FileBrowsePopupContent
+                color: hex('#606060')
+                font_size: str(self.size[1]*0.4)
+                halign: "center"
+                valign: "center"
+                text_size: self.size
+                markup: True
+                padding_x: self.size[0] * 0.02
+        BoxLayout:
+            size_hint_y: 1
+
+        BoxLayout:
+            size_hint_y: 10
+            orientation: "horizontal"
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 30
+                Button:
+                    id: id_CancelButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    text: root.id_CancelButtonContent
+                    font_size: self.size[1]*0.5
+                    canvas.before:
+                        Color:
+                            rgba: hex('#9e0b0f') if self.state=='normal' else hex('#ce8587')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+            BoxLayout:
+                size_hint_x: 3
+            BoxLayout:
+                size_hint_x: 30
+                Button:
+                    id: id_ConvertDicomButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    text: root.id_ConvertDicomButtonContent
+                    font_size: self.size[1]*0.5
+                    canvas.before:
+                        Color:
+                            rgba: hex('#ed7117') if self.state=='normal' else hex('#ec9706')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+            BoxLayout:
+                size_hint_x: 3
+            BoxLayout:
+                size_hint_x: 30
+                Button:
+                    id: id_ProceedButton
+                    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+                    disabled: True if id_filechooser.selection == [] else False
+                    opacity: 0.6 if id_filechooser.selection == [] else 1
+                    text: root.id_ProceedButtonContent
+                    font_size: self.size[1]*0.5
+                    canvas.before:
+                        Color:
+                            rgba: hex('#5f9a34') if self.state=='normal' else hex('#afcc9a')  # visual feedback of press
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+            BoxLayout:
+                size_hint_x: 2
+
+

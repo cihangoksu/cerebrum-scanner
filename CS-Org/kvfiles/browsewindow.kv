@@ -1,0 +1,533 @@
+<BrowseWindow>:
+    name: 'browseScreen'
+    id: id_BrowseWindow
+
+    TranscriptorBackground:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 2
+
+        BoxLayout:
+            size_hint_y: 84
+        BoxLayout:
+            size_hint_y: 10
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 23
+                Button:
+                    id: id_ChooseAnotherFileButton
+                    disabled: False
+                    background_color: 0,0,0,0
+                    text_size: self.size
+                    halign: "center"
+                    valign: "center"
+                    padding_y: self.size[1]*0.15
+                    font_size: self.size[1]*0.24
+                    text: "     Choose CT scan"
+                    pos: self.pos
+                    size: self.size
+                    opacity: 0.8 if self.disabled == True else 1
+                    on_release:
+                        root.Callback_Button_Browse()
+                    canvas.before:
+                        Color:
+                            rgba: hex('#c85417') if self.state=='normal' else hex('#d0a23e')
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+                    canvas.after:
+                        Rectangle:
+                            pos: self.pos[0] + self.size[0]*0.15, self.pos[1] + self.size[1]*0.32
+                            size: self.size[1]*0.45,self.size[1]*0.36
+                            source: f'{root.assets_path}/images/PNG/icons-another.png'
+            BoxLayout:
+                size_hint_x: 2
+            BoxLayout:
+                size_hint_x: 23
+                Button:
+                    id: id_ConsultButton
+                    disabled: True
+                    background_color: 0,0,0,0
+                    text_size: self.size
+                    halign: "center"
+                    valign: "center"
+                    padding_y: self.size[1]*0.15
+                    font_size: self.size[1]*0.24
+                    text: "     Upload and consult"
+                    pos: self.pos
+                    size: self.size
+                    opacity: 0.8 if self.disabled == True else 1
+                    on_release:
+                        root.Callback_Button_Consult()
+                    canvas.before:
+                        Color:
+                            rgba: hex('#5f9a34') if self.state=='normal' else hex('#afcc9a')
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [20,]
+
+                    canvas.after:
+                        Rectangle:
+                            pos: self.pos[0] + self.size[0]*0.15, self.pos[1] + self.size[1]*0.32
+                            size: self.size[1]*0.45,self.size[1]*0.36
+                            source: f'{root.assets_path}/images/PNG/icons-upload.png'
+
+            BoxLayout:
+                size_hint_x: 50
+
+
+        BoxLayout:
+            size_hint_y: 4
+            FloatLayout:
+                Label:
+                    id: id_footer
+                    text: ""
+                    color: hex('#191919')
+                    halign: "center"
+                    text_size: self.width, None
+                    font_size: self.size[0]/90
+
+    FloatLayout:
+        Image:
+            id: id_cerebrumscanner_logo
+            source: f'{root.assets_path}/images/PNG/CS-LOGO-WHITE.png'
+            # size_hint: None, None
+            size_hint: 0.16, 0.16
+            pos_hint: {"center_x":0.25 , 'center_y':0.92}
+            keep_ratio: True
+
+    FloatLayout:
+        Widget:
+            id: id_ProgressBarTotal
+            opacity: 1
+            size_hint_x: 0.48
+            size_hint_y: 0.06
+            pos_hint: {'x': 0.02, 'y':0.76}
+            canvas.before:
+                Color:
+                    rgba: hex('#191919')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [self.size[1]/2,]
+
+        Widget:
+            id: id_ProgressBarPartial
+            opacity: 1
+            size_hint_x: 0.24
+            size_hint_y: 0.06
+            pos_hint: {'x': 0.02, 'y':0.76}
+            canvas.before:
+                Color:
+                    rgba: hex('#5f9a34')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [self.size[1]/2,]
+
+        Label:
+            id: id_ProgressBrowse
+            opacity: 1
+            pos_hint: {"center_x":0.13 , 'y':0.76}
+            size_hint: 0.48, 0.06
+            text_size: self.size
+            text: 'Create a case'
+            color: hex('#e9e9e9')
+            font_size: self.size[0]/28
+            halign: "center"
+            valign: "middle"
+            markup: True
+            bold: True
+
+
+        Label:
+            id: id_ProgressUpload
+            opacity: 1
+            pos_hint: {"center_x":0.37 , 'y':0.76}
+            size_hint: 0.48, 0.06
+            text_size: self.size
+            text: 'Upload'
+            color: hex('#e9e9e9')
+            font_size: self.size[0]/28
+            halign: "center"
+            valign: "middle"
+            markup: True
+
+
+    FloatLayout:
+        id: id_LayoutBeforeChoose
+        Widget:
+            id: id_ContainerBrowseScreen
+            opacity: 1
+            size_hint_x: 0.48
+            size_hint_y: 0.52
+            pos_hint: {'x': 0.02, 'y':0.22}
+            canvas.before:
+                Color:
+                    rgba: hex('#d5d5d5')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20,]
+
+        Label:
+            id: id_LabelPatient_ID
+            size_hint_x: 0.20
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.03, 'center_y':0.67}
+            text: "Patient ID:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.15
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            markup: True
+
+        PatientIDTextInput:
+            id: id_PatientID
+            name:"Patient_ID"
+            size_hint_x: 0.30
+            size_hint_y: 0.05
+            pos_hint: {'x': 0.18, 'center_y':0.68}
+
+            font_size: self.size[0]*2/14/3
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+            
+
+        Label:
+            id: id_LabelPatient_Age
+            size_hint_x: 0.20
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.03, 'center_y':0.57}
+            text: "Age:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.15
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            markup: True
+
+
+        PatientIDTextInput:
+            id: id_PatientAge
+            name:"Patient_Age"
+            size_hint_x: 0.10
+            size_hint_y: 0.05
+            pos_hint: {'x': 0.10, 'center_y':0.58}
+
+            font_size: self.size[0]*2/14
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+            
+
+        Label:
+            id: id_LabelPatient_Sex
+            size_hint_x: 0.20
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.17, 'center_y':0.57}
+            text: "Sex (m/f):"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.15
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            markup: True
+
+        PatientIDTextInput:
+            id: id_PatientSex
+            name:"Patient_Sex"
+            size_hint_x: 0.10
+            size_hint_y: 0.05
+            pos_hint: {'x': 0.38, 'center_y':0.58}
+
+            font_size: self.size[0]*2/14
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+            
+
+        Label:
+            id: id_LabelPatient_SymptomOnSet
+            size_hint_x: 0.20
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.03, 'center_y':0.47}
+            text: "Onset (mins):"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.15
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            markup: True
+
+        PatientIDTextInput:
+            id: id_PatientSymptomOnset
+            name:"Patient_SymptomOnset"
+            size_hint_x: 0.25
+            size_hint_y: 0.05
+            pos_hint: {'x': 0.23, 'center_y':0.48}
+
+            font_size: self.size[0]*4/14/5
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+            
+
+        Label:
+            id: id_LabelPatient_NIHSS
+            size_hint_x: 0.20
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.03, 'center_y':0.37}
+            text: "NIHSS:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.15
+            text_size: self.size
+            halign: "left"
+            valign: "middle"
+            markup: True
+
+        PatientIDTextInput:
+            id: id_PatientNIHSS
+            name:"Patient_SymptomNIHSS"
+            size_hint_x: 0.10
+            size_hint_y: 0.05
+            pos_hint: {'x': 0.14, 'center_y':0.38}
+
+            font_size: self.size[0]*4/14/2
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+
+
+        Label:
+            id: id_LabelPatient_MRS
+            size_hint_x: 0.20
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.17, 'center_y':0.37}
+            text: "mRS:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.15
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            markup: True
+
+        PatientIDTextInput:
+            id: id_PatientMRS
+            name:"Patient_MRS"
+            size_hint_x: 0.10
+            size_hint_y: 0.05
+            pos_hint: {'x': 0.38, 'center_y':0.38}
+
+            font_size: self.size[0]*4/14/2
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+
+        Label:
+            id: id_ScanPathInfo
+            size_hint_x: 0.50
+            size_hint_y: 0.08
+            pos_hint: {'x': 0.02, 'center_y':0.27}
+            text: "Waiting for the CT scan"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.06
+            text_size: self.size
+            halign: "center"
+            valign: "middle"
+            markup: True
+
+
+
+        Button:
+            id: id_previous_nifti
+            disabled: False
+            background_color: 0,0,0,0
+            text_size: self.size
+            halign: "center"
+            valign: "center"
+            padding_y: self.size[1]*0.15
+            font_size: self.size[1]*1.2
+            text: "-"
+
+            size_hint_x: 0.02
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.52, 'center_y':0.97}
+
+            opacity: 0.8 if self.disabled == True else 1
+            on_release:
+                root.Callback_get_previous_scan()
+            canvas.before:
+                Color:
+                    rgba: hex('#000000') if self.state=='normal' else hex('#d0a23e')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [5,]
+
+
+        Button:
+            id: id_next_nifti
+            disabled: False
+            background_color: 0,0,0,0
+            text_size: self.size
+            halign: "center"
+            valign: "center"
+            padding_y: self.size[1]*0.15
+            font_size: self.size[1]*1.2
+            text: "+"
+
+            size_hint_x: 0.02
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.92, 'center_y':0.97}
+
+            opacity: 0.8 if self.disabled == True else 1
+            on_release:
+                root.Callback_get_next_scan()
+            canvas.before:
+                Color:
+                    rgba: hex('#000000') if self.state=='normal' else hex('#d0a23e')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [5,]
+
+
+        Label:
+            id: id_scan_name
+            # background_color: 0,0,0,0
+            background_color: 1,1,0,1
+            text_size: self.size
+            halign: "center"
+            valign: "center"
+            padding_y: self.size[1]*0.15
+            font_size: self.size[1]*0.6
+            text: root.selected_scan_name
+
+            size_hint_x: 0.36
+            size_hint_y: 0.04
+            pos_hint: {'center_x': 0.73, 'center_y':0.97}
+
+            opacity: 1
+            canvas.before:
+                Color:
+                    rgba: hex('#000000')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [5,]
+
+
+        Spinner:
+            id: id_scan_window
+            text: 'Select window to view'
+
+            size_hint_x: 0.15
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.55, 'center_y':0.92}
+            opacity: 1
+            text: 'Custom' # Width, Level windowing (W:70, L:30) (W:180, L:80) (W:30, L:30) (W:400, L:50) (W:2000, L:600)
+            values: 'Custom', 'Brain', 'Blood', 'Stroke', 'Soft tissue', 'Bone'
+            on_text: root.Callback_Apply_Window()
+
+
+
+        Label:
+            id: id_LabelWindow_width
+            size_hint_x: 0.05
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.71, 'center_y':0.92}
+            text: "width:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.3
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            markup: True
+
+        
+        CTScanLevelWidthTextInput:
+            id: id_TextInputWindow_width
+            name:"TextInputWindow_width"
+            size_hint_x: 0.04
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.77, 'center_y':0.92}
+
+            font_size: self.size[0]*0.3
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+
+
+
+
+
+        Label:
+            id: id_LabelWindow_level
+            size_hint_x: 0.05
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.81, 'center_y':0.92}
+            text: "level:"
+            line_height: 1.2
+            color: hex('#383838')
+            font_size: self.size[0]*0.3
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            markup: True
+
+        CTScanLevelWidthTextInput:
+            id: id_TextInputWindow_level
+            name:"TextInputWindow_level"
+            size_hint_x: 0.04
+            size_hint_y: 0.04
+            pos_hint: {'x': 0.87, 'center_y':0.92}
+
+            font_size: self.size[0]*0.3
+            padding_x: self.size[0]/20
+            padding_y: self.size[1]/5
+
+
+
+
+
+
+        FloatLayout:
+            id: id_BoxLayoutScatter
+            size_hint_x: 0.46
+            size_hint_y: 0.80
+            pos_hint: {'center_x': 0.75, 'center_y':0.44}
+            background_color: 0,0,0,0
+            canvas.before:
+                Color:
+                    rgba: hex('#d3d3d3')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20,]
+
+            Image:
+                id: id_CTScanScatterImage
+                source: f'{root.assets_path}/images/PNG/ID_5acb8fb91.png'
+                allow_stretch: True
+                keep_ratio: True
+
+                texture: root.texture_CTScanScatterImage
+                
+                opacity: 0 
+
+                pos: self.pos
+                
+                size_hint_x: 1*root.scale_factor_size
+                size_hint_y: 1*root.scale_factor_size
+                
+                # height: self.parent.height
+                # width: self.parent.height*self.image_ratio
+
