@@ -395,7 +395,7 @@ class BrowseWindow(Screen, CommonGestures):
         import shutil
         shutil.make_archive(dest, 'zip', self.selected_scan_nifti_folder)
 
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         
         self.upload_case_to_server(case_path=case_path)
         print('case is now uploaded to the server!')
@@ -406,7 +406,7 @@ class BrowseWindow(Screen, CommonGestures):
         clCLIENT.connect_server()
         clCLIENT.send_msg('command:receive_case')
         clCLIENT.send_file(file_path=case_path)
-
+        clCLIENT.send_msg('command:break')
 
     ############################################
     ############################################

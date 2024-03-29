@@ -53,15 +53,22 @@ class Server(object):
 
 
     def apply_command(self, msg):
+        print('applying the command now')
         msg_list = msg.split(':')
         if msg_list[0] != 'command': 
             print(f"No command is sent: {msg}")
             return None
         cmd = msg_list[1]
-
+        print('cmd is' + cmd)
         if cmd == 'receive_case': 
-            self.receive_file()
+            print('receiving the file...')
+            receive_out = self.receive_file()
             print(f"Applied command is: {cmd}")
+            print(receive_out)
+            
+            self.extract_zip_in_tmp()
+            print(f"Case is now in the server received-folders")
+
         else: return None
 
 
@@ -77,18 +84,39 @@ class Server(object):
     ##########################################
     def receive_file(self):
         #Open one recv.txt file in write mode
-        zip_filename = "received.zip"  # Change to the desired received zip file name
+        received_zip_file_path = os.path.join(self.__path_dict__['dot-cerebrum-scanner-tmp'],'received.zip')
 
-        with open(zip_filename, "wb") as file:
+        print('file path is:' + received_zip_file_path)
+
+        with open(received_zip_file_path, "wb") as file:
+            print('inside with open')
+            iter_num = 0
             while True:
+                iter_num += 1
+                print(f'iter #{iter_num}')
                 data = self.client_socket.recv(1024)
-                if not data:
+                print(type(data))
+                if data: 
+                    print('writing...')
+                    file.write(data)
+                else:
+                    print('Loop is now broken')
                     break
-                file.write(data)
+
+
+                
                     
         print("\n File has been copied successfully \n")
 
 
+
+    def extract_zip_in_tmp(self):
+        received_zip_file_path = os.path.join(self.__path_dict__['dot-cerebrum-scanner-tmp'],'received.zip')
+        dest_path = os.path.join(self.__path_dict__['dot-cerebrum-scanner-jobs'],'received')
+
+        import shutil
+        shutil.unpack_archive(received_zip_file_path, dest_path)
+        
 
 
     def send_file(filename, client_socket):

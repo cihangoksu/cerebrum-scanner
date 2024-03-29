@@ -1,4 +1,7 @@
 ![CS-LOGO](https://github.com/cihangoksu/cerebrum-scanner/assets/58362107/ce15b97d-1d83-43c4-b032-b6ad05136df4)
+
+# “Revolutionizing stroke diagnostics with Cerebrum Scanner: Empower stroke teams, save lives!”
+
 # Cerebrum scanner - A digital platform for efficient acute medical consulting
 Cerebrum Scanner (CS) is a digital platform for easy, fast, and efficient acute medical data and image sharing in acute medical teams. A specific example is the second most-deadly disease in the world STROKE! Significant amount of hospitals and Emergency doctors use insecure, less-efficient messanger apps for acute medical data and image sharing. They take a video or image of the medical scan (computerized tomography CT or magnetic resonance imaging MRI) share in their medical teams, e.g. to consult a stroke-specialist remotely. This does not only violate patient's data privacy but also inefficient for a healthy communication within teams, as stroke specialists need a more advanced image viewer with essential features like zoom in/out, contrast adjustment and enhancement, stroke windowing, etc. for a better diagnosis.
 
